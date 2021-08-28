@@ -1,0 +1,44 @@
+//c++
+class Solution {
+public:
+    bool isValidSudoku(vector<vector<char>>& board) {
+        int i,j;
+        bool flag;
+        for (i= 0;i<9;i++){
+            for (j = 0;j<9;j++){
+                if(board[i][j] != '.'){
+                    if(!validate(board,i,j)){
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+        
+    }
+    bool validate(vector <vector<char>>& board,int x,int y){
+        int row,col, val = board[x][y];
+    for(row=0;row<9;row++) {
+        if(row!=x && board[row][y] == val)
+            return false;
+    }
+    for(col=0;col<9;col++){
+        if(col!=y && board[x][col] == val)
+            return false;
+    }
+
+    int i,j;
+    i = x - x%3;
+    j = y - y%3;
+    
+    for(row = i; row < i+3;row++) {
+        for(col= j; col < j+3;col++) {
+            if(!(row==x && col==y) && board[row][col] == val)
+                return false;
+        }
+    }
+    return true;
+
+        
+    }
+};
